@@ -51,14 +51,14 @@
 
 
             
-            svg.selectAll(circle)
+            svg.selectAll("circle")
                         .data(dataset)
                         .enter()
                         .append("circle")
-                        .attr("cx", d => i[0]) //(a required circle value, and a function of what it returns)  // Hint: we want to return d[] with the x value of the array
-                        .attr("cy", d => i[1]) //(a required circle value, and a function of what it returns)  // Hint: we want to return d[] with the y value of the array 
-                        .attr("r", 10) //(another required circle value, and a number: try 10)
-                        .attr("fill","blue"); //optional: change the color of the circles 
+                        .attr("cx", (d) => d[0]) //(a required circle value, and a function of what it returns)  // Hint: we want to return d[] with the x value of the array
+                        .attr("cy", (d) => d[1]) //(a required circle value, and a function of what it returns)  // Hint: we want to return d[] with the y value of the array 
+                        .attr("r", 5) //(another required circle value, and a number: try 10)
+                        .attr("fill","green"); //optional: change the color of the circles 
 
             //HINT: don't forget the ending ;
 
@@ -68,13 +68,14 @@
             //NOTE: This will rely on much of the same code we have used in our SVG example. 
             
             
-            // TODO: svg.selectAll()
-            //      .data()
-            //      .enter()
-            //      .append()
-            //      .text() //we want the text to return the data values
-            //      .attr() //we want to give the text an x value, use what you used above, mind the difference between circle text properties 
-            //      .attr(); //we want to give the text a y value, use what you used above, mind the difference between circle text properties 
+            svg.selectAll("text")
+                 .data(dataset)
+                 .enter()
+                 .append("text")
+                 .text(d=>d[0] + ", " + d[1]) //we want the text to return the data values
+                 .attr("x",(d) => d[0]+10) //we want to give the text an x value, use what you used above, mind the difference between circle text properties 
+                 .attr("y",(d) => d[1]+10)
+                 .attr("font-size","12"); //we want to give the text a y value, use what you used above, mind the difference between circle text properties 
 
 
             
