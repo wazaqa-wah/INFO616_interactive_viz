@@ -11,4 +11,4 @@ update: I put wrapped d the function with () and it worked, so I am not sure wha
 
 Here is an image of how that displays:
 
-![scatter plot] (https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class2_homework/scatter_plot.png "scatter_plot")
+![scatter plot] (https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class2_homework/scatter_plot.png "scatterplot")
