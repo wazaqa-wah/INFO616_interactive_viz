@@ -11,4 +11,4 @@ The attached visualization is a scatter plot that I created using D3. It is not 
 
 Here is an image of how that displays:
 
-![alt text](/Users/ziqiwang/Desktop/interactive_viz/wk2-code/scatter plot.png "scatter plot")
+![alt text](~/Desktop/interactive_viz/wk2-code/scatter plot.png "scatter plot")
