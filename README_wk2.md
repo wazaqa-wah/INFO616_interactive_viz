@@ -11,4 +11,4 @@ update: I put wrapped d the function with () and it worked, so I am not sure wha
 
 Here is an image of how that displays:
 
-![image](scatter_plot.png "scatter plot")
+![scatter plot](/Users/ziqiwang/Desktop/interactive_viz/INFO616_interactive_viz "scatter_plot.png")
