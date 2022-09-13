@@ -1,2 +1,14 @@
-# INFO616_interactive_viz
-Hi hi hi, this new repo is the Fall 2022 Programming Interactive Visualization class. My name is Ziqi and I hope that through this class I can learn a lot of new stuff about D3, create some cool visualizations, and make a fun project in the end. I do not have a coding background, especially the front end of stuff, but I am excited to learn!
+
+Week 2 Homework
+===============
+
+D3 Foundations Chart
+---------------------
+
+The attached visualization is a bar chart that shows the totals, per day for a week, of emails that I have received. The data is self-sourced, as this is a personal quantitative self project. 
+
+(NOTE: Be sure to cite external data with a link to the source and attribution to the author if using. Further, be sure to cite any other related resources you've referenced for academic integrity purposes.)
+
+Here is an image of how that displays:
+
+![alt text](/path/to/img.jpg "Image Title")
