@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Circle Data Example</title>
+        <script src= "https://d3js.org/d3.v7.min.js"></script>
+        <style type="text/css"> 
+        	/*TBD */
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+
+//const dataset;
+    const margin = 30;
+    const width = 500; 
+    const height = 500; 
+
+//import data
+    d3.csv("nyc_swimming_pool.csv").then(dataset => {
+//format data
+    dataset.forEach(d => { 
+            d.Bourough = d.Bourough;
+            d.Number = +d.Number; 
+        });
+    
+        const maxY = d3.max(dataset, d => d.Number);
+
+        const xScale = d3.scaleBand()
+                    .domain(dataset.map(d => d.Bourough))
+                    .range([margin, width - margin])
+                    .paddingInner(.02);
+
+        const yScale = d3.scaleLinear()
+                    .domain([0, maxY]) 
+                    .range([height - margin, margin]);
+
+        const bottomAxis = d3.axisBottom().scale(xScale);
+        const leftAxis = d3.axisLeft().scale(yScale);
+//color scale for bubbles
+        const myColor = d3.scaleLinear()
+                        .domain([0,d3.maxY])
+                        .range(["white", "blue"]);
+
+
+//Create our SVG element
+        const svg = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+//Attempt to make bubble chart
+        // d3.select("svg")
+        // 	   svg.selectAll("circle")
+            //    .data(dataset)
+            //    .enter()
+            //    .append("circle")
+            //    .attr("r", d => d)
+            //    .attr("cx", (d,i) => i * (svgWidth/dataset.length) + 20)
+            //    .attr("cy", svgHeight/2)
+        	//    .attr("fill", d=> myColor(d));
+
+//This is for making a bar chart
+    svg.selectAll("rect") 
+    .data(dataset) 
+    .enter()
+    .append("rect")
+    .attr("x", d => xScale(d.Bourough)) 
+    .attr("y", d => yScale(d.Number)) 
+    .attr("width", xScale.bandwidth())
+    .attr("height", d => (height-margin) - yScale(d.Number))
+    .attr("fill", "pink");
+
+//Implement bottom axis
+    svg.append("g")
+    .attr("transform", "translate(0," + (height - margin) + ")") 
+    .call(bottomAxis); 
+
+//Implement left axis
+    svg.append("g")
+    .attr("transform", "translate(" + margin + ",0)")
+    .call(leftAxis); 
+
+    console.log(dataset);
+
+});
+        </script>
+    </body>
+</html>
