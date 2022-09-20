@@ -9,5 +9,5 @@ The attached visualization is a bar chart that I created using D3. I used NYC Pa
 
 Here is an image of how that displays:
 
-![bar chart] (https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class2_homework/scatter_plot.png "Graph of the number of park pools in NYC")
+![bar chart] (Screen Shot 2022-09-20 at 10.02.28 AM.png "Graph of the number of park pools in NYC")
 
