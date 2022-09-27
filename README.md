@@ -9,4 +9,4 @@ I first used SVG to create a flower shape, whihc is really fun and interesting. 
 
 Here is an image of how that displays:
 
-![alt text](/path/to/img.jpg "Image Title")
+![alt text](https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class4_homework/flower.png "svg flower")
