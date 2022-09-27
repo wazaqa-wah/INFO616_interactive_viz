@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>SVG Path Heart</title>
+        <script src= "https://d3js.org/d3.v7.min.js"></script>
+        <style type="text/css">
+		    svg{
+            width:1000px;
+            height:1000px;
+          }
+
+          .title {
+            font-size: 16px;
+            font-weight: bold;
+            font-family: sans-serif;
+          }
+
+          .labels{
+            font-size: 14px;
+            font-weight: normal;
+            font-family: sans-serif;
+          }    
+        </style>
+    </head>
+
+    <body>
+        <svg></svg> <!--Remember to add the svg here like this if you are applying it above-->
+
+       <script type="text/javascript">
+       
+       //data source: https://www.nybg.org/content/uploads/2018/08/SCI_State-of-the-Citys-Plants-2018_Final-8.2_Low.pdf
+       //import Data
+       d3.csv("NYC_flower.csv").then(dataset => {
+        //format data
+        dataset.forEach(d => { 
+            d.Genera = d.genera;
+            d.Number = d.number; 
+            });
+
+       //Color using linear scale, d3 min and max 
+       const maxData = d3.max(dataset, d=>d.number);
+       const minData = d3.min(dataset, d=>d.number);
+       const myColor = d3.scaleQuantize()
+                          .domain([minData, maxData])
+                          .range(["#fae0e4", "#ff85a1","#ff0a54"]); 
+   
+
+       //Drawn with d3.line()                 
+       const flowerGenerator = d3.line();
+       
+
+       const flower_points = ["M200,200 C150,100 250,100 200,200 M200,200 C250,100 312,200 200,200 M200,200 C312,200 250,300 200,200 M200,200 C250,300 150,300 200,200 M200,200 C150,300 88,200 200,200 M200,200 C88,200 150,100 200,200 "];
+
+       const pathString = flowerGenerator(flower_points);
+       const perRow = 5;
+       const size = 100;
+       const sizeY =110;
+
+       const svg = d3.select("svg");
+
+       //making groups
+       const g = svg.selectAll("g")
+                     .data(dataset)
+                     .enter()
+                     .append("g")
+                     .attr("transform", (d,i)=>{
+                       const x = (i % perRow +1) * size; //change the +1 in the () to +0 or +2 or + 3 to see what happens! 
+                       const y = (Math.floor(i/row)+.55) * sizeY;
+                       return "translate(" + [x,y] + ")";})
+                     
+
+       g.append("path")
+        .attr("d", pathString)
+        .attr("fill", d=> myColor(d.number))
+                     .attr("stroke", "red")
+                     .attr("stroke-width", "1px");
+
+       //Make Labels
+       g.append("text")
+         .attr("x", size/2) //x coordinate
+         .attr("y", size + 5) //y coordinate
+         .attr("text-anchor", "middle") //horizontal text alignment 
+         .attr("fill", "#c9184a")
+         .attr("dy", "5px") //y coordinate offset
+         .attr("class","labels")
+         .text(d=>d.genera); //the text 
+
+       //Note the difference between svg.append text and g.append in this example. 
+       svg.append("text")
+          .attr("x", 400) //x coordinate
+          .attr("y", 40) //y coordinate
+          .attr("text-anchor", "middle") //horizontal text alignment
+          .attr("fill", "#c9184a")
+          .attr("class", "title")
+          .text("Top 10 genera in the New York City flora, by number of species"); //the text
+        }); 
+       </script>
+   </body>
+</html>
