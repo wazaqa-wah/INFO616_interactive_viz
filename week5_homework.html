@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>SVG Oridinal Color Scale</title>
+        <script src= "https://d3js.org/d3.v7.min.js"></script>
+        <style type="text/css"> 
+
+        	/* svg{
+            width:800px;
+            height:800px;
+          } */
+
+          h1 {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: sans-serif;
+          }
+
+          .title {
+            font-size: 15px;
+            font-weight: bold;
+            font-family: sans-serif;
+          }
+
+
+        </style>
+    </head>
+    <body>
+      <h1>"The Scream" Color Scale for people with different visual impairaments</h1>
+    	<svg width="500" height="150" id="svg1"></svg>  
+		  <svg width="500" height="150" id="svg2"></svg>
+      <svg width="500" height="150" id="svg3"></svg>
+      <svg width="500" height="150" id="svg4"></svg>
+
+        <script type="text/javascript">
+
+        //Create svg canvas
+        const svg1 = d3.select("#svg1");
+        const svg2 = d3.select("#svg2");
+        const svg3 = d3.select("#svg3");
+        const svg4 = d3.select("#svg4");
+
+        const width = 400;
+
+        const dataset = ["A", "B", "C", "D", "E"];
+        // const maxData = d3.max(dataset);
+        // const minData = d3.min(dataset);
+        
+        //create color scheme using d3.scaleOrdinal
+        const normalColor = d3.scaleOrdinal().domain(dataset)
+                                         .range(["#D1400E", "#1E3539", "#7D724B", "#B7A260", "#DC7711"]);
+
+        
+        const protanomalyColor = d3.scaleOrdinal().domain(dataset)
+                                         .range(["#9F6112", "#293235", "#7C704C", "#B5A360", "#B88915"]);
+
+        const deuteranomalyColor = d3.scaleOrdinal().domain(dataset)
+                                         .range(["#A85D02", "#2B313A", "#826E4C", "#BF9E62", "#C48301"]);
+
+        const tritanomalyColor = d3.scaleOrdinal().domain(dataset)
+                                         .range(["#D13D2C", "#1E3539", "#806D65", "#BB9D8D", "#DE7252"]);
+
+        //Create color swatches and append data and colors 
+        svg1.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x", (d,i) => i * (width/dataset.length)+ 60)
+               .attr("y", 100)
+               .attr("width", 40)
+               .attr("height", 40)
+               .attr("fill", d => normalColor(d));
+
+        svg2.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x", (d,i) => i * (width/dataset.length)+ 60)
+               .attr("y", 100)
+               .attr("width", 40)
+               .attr("height", 40)
+               .attr("fill", d => protanomalyColor(d));
+
+        svg3.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x", (d,i) => i * (width/dataset.length)+ 60)
+               .attr("y", 100)
+               .attr("width", 40)
+               .attr("height", 40)
+               .attr("fill", d => deuteranomalyColor(d));
+
+        svg4.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x", (d,i) => i * (width/dataset.length)+ 60)
+               .attr("y", 100)
+               .attr("width", 40)
+               .attr("height", 40)
+               .attr("fill", d => tritanomalyColor(d));
+               
+        svg1.append("text")
+              .attr("x", 100) 
+              .attr("y", 80) 
+              .attr("text-anchor", "middle") //horizontal text alignment
+              .attr("fill", "black")
+              .attr("class", "title")
+              .text("Normal")
+
+        svg2.append("text")
+              .attr("x", 150) 
+              .attr("y", 80) 
+              .attr("text-anchor", "middle") //horizontal text alignment
+              .attr("fill", "black")
+              .attr("class", "title")
+              .text("Red-Weak/Protanomaly")
+
+        svg3.append("text")
+              .attr("x", 150) 
+              .attr("y", 80) 
+              .attr("text-anchor", "middle") //horizontal text alignment
+              .attr("fill", "black")
+              .attr("class", "title")
+              .text("Green-Weak/Deuteranomaly")
+       
+        svg4.append("text")
+              .attr("x", 150) 
+              .attr("y", 80) 
+              .attr("text-anchor", "middle") //horizontal text alignment
+              .attr("fill", "black")
+              .attr("class", "title")
+              .text("Blue-Weak/Tritanomaly")
+        </script>
+    </body>
+</html>
