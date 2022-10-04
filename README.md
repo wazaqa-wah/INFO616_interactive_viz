@@ -8,4 +8,4 @@ The attached visualization is based on the 5-color color scale for the world fam
 
 Here is an image of how that displays:
 
-![alt text](/path/to/img.jpg "Image Title")
+![alt text](https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class5_homework/theScream.png "color scale for The Scream")
