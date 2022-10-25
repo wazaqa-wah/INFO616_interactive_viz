@@ -8,4 +8,4 @@ For this homework assighment, I tried to create a slider to show how a svg mount
 
 Here is an image of how that displays:
 
-![alt text](https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class5_homework/theScream.png "color scale for The Scream")
+![alt text](https://github.com/wazaqa-wah/INFO616_interactive_viz/blob/class8_homework/Screen%20Shot%202022-10-25%20at%2011.00.01%20AM.png "moutian change color")
