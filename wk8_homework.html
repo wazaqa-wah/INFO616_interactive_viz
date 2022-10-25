@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mountain change color</title>
+        <script src= "https://d3js.org/d3.v7.min.js"></script>
+        <style type="text/css"> 
+            svg{
+                width:1000px;
+                height:500px;
+                margin-left: auto; 
+                margin-right: auto;
+                display: block;
+                }
+            .slider{
+              width: 25%;
+              height:15px;
+              border-radius: 5px;
+              background: #d3d3d3;
+              outline: none;
+              opacity: 0.8;
+            }
+            .slider::-moz-range-thumb{
+              width: 25px;
+              height: 25px;
+              border-radius: 50%;
+              background: midnightblue;
+              cursor: pointer;
+            }    
+            datalist{
+              display: flex;
+              width: 25%;
+              justify-content: space-between;
+              margin-top: -10px;
+              padding-top: 0px;
+            }
+
+            option{
+              width: 23ex;
+              display: flex;
+              justify-content: center;
+              height: 30px;
+              align-items: end;
+            }
+
+      </style>
+    </head>
+    <body>
+        <svg></svg>
+        <div id="container">
+        <input id="mySlider" type="range" min="0" max="50" step="10" value="0" class="slider" list="list">
+        <datalist id="list">
+          <option>0</option>
+          <option>10</option>
+          <option>20</option>
+          <option>30</option>
+          <option>40</option>
+          <option>50</option>
+        </datalist>
+        </div>
+        <script type="text/javascript">
+        
+        const w = 1000;
+        const h = 500;
+
+        
+
+        const dataset= [10, 20, 30, 40, 50];
+        // const myColor = d3.scaleQuantize()
+        //                   .domain([minData, maxData])
+        //                   .range(["green","orange","white"]);
+
+        // const mountainLines = d3.line();
+
+
+        
+        const mountainGenerator = d3.line();
+
+        const mt_points = [
+                [60,10],
+                [95,95],
+                [5,95],
+                [30,50],
+                [35,60],
+                [44,35],
+                [50,50],
+                [60,10]
+                ];
+
+        
+
+        const pathString = mountainGenerator(mt_points);
+
+        const svg = d3.select("svg");
+
+        
+
+        const mountain = svg.selectAll("mountain")
+                            .data(dataset)
+                            .enter()
+                            .append("path")
+                            .attr("d", pathString)
+                            .attr("stroke", "black")
+                            .attr("fill", "pink")
+                            .attr("stroke-weight", "2px");
+
+      
+
+        //on a change to the slider change the color of the mountains by using .filter()
+        d3.select("input")
+          .on("change", (event, d) => {
+            
+            const num = event.currentTarget.value;
+           
+            mountain.attr("fill", "midnightblue")
+               .filter(d => d = num)
+               .attr("fill", "green");
+              //  .attr("fill", d=> myColor(dataset)); 
+               //what i want to do here is to say everytime the dataset number equalls to the number on the slider, change to a different color
+
+                   
+          });
+
+        </script>
+    </body>
+</html>
