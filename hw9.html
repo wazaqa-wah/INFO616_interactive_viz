@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tree</title>
+        <script src= "https://d3js.org/d3.v7.min.js"></script>
+        <style type="text/css">
+          
+          .links {
+            stroke: black;
+            stroke-width: .5px;
+            fill: none;
+          }
+
+          .nodes {
+            fill: pink;
+            stroke: black;
+            stroke-width:.5px;
+          }
+
+
+
+        </style>
+    </head>
+    <body>
+        <svg width="1000" height="600"></svg>
+        <script type="text/javascript">
+           
+            //Everything we are familiar with:
+            const svg = d3.select("svg")
+                          .append("g")
+                          .attr("transform", "translate(20, 20)"); //move it over (padding)
+            const w = 600;
+            const h= 600; 
+
+            //Our hierarchical dataset -- you'll use d3.json() instead of d3.csv() to load
+            d3.json("tree_cat.json").then(dataset=>{
+
+            
+
+            //our two requirements here are d3.tree() and d3.hierarchy()
+            
+            //tree layout
+            const tree = d3.tree()
+                           .size([w-100, h-100]); //tree size
+            
+            // //alternativley, cluster layout (which is less organized)
+            // const cluster = d3.cluster()
+            //                .size([w-100, h-100]); //cluster size
+            
+            //dataset to tree data
+            const root = d3.hierarchy(dataset);
+            tree(root); //writing x/y vals for each node! -- tree data!
+            //cluster(root); //cluster data!
+
+            //see how this changes:
+            console.log(dataset); 
+            console.log(root); 
+                               
+            //our links (curves)
+            const links = svg.selectAll("path")
+                             .data(root.links())
+                             .enter()
+                             .append("path")
+                             .classed("links", true)//.classed() instead of .attr() for classes
+                             .attr("d", d3.linkHorizontal() //horizontal link generator (ensure you match nodes) 
+                                          .x(d => d.y) //horizontal - flip x/y
+                                          .y(d => d.x));
+                            //  .attr("d", d3.linkVertical() //vertical link generator (ensure you match nodes)
+                            //               .x(d => d.x)
+                            //               .y(d => d.y));
+
+            // //alternatively, our links (lines)
+            // const links = svg.selectAll("line")
+            //                  .data(root.links())
+            //                  .enter()
+            //                  .append("line")
+            //                  .classed("links", true)
+            //                  .attr("x1", d=> d.source.y) //flip x/y for horizontal
+            //                  .attr("y1", d=> d.source.x)
+            //                  .attr("x2",d=> d.target.y)
+            //                  .attr("y2", d=>d.target.x);
+            // //                  // .attr("x1", d=> d.source.x) //vertical
+            // //                  // .attr("y1", d=> d.source.y)
+            // //                  // .attr("x2",d=> d.target.x)
+            // //                  // .attr("y2", d=>d.target.y);
+            
+
+            //our nodes (circles) 
+            const nodes = svg.selectAll("circle")
+                             .data(root.descendants())
+                             .enter()
+                             .append("circle")
+                             .classed("nodes", true)
+                             .attr("cx", d=>d.y)//horizontal - flip x/y
+                             .attr("cy", d=>d.x)
+                            //  .attr("cx", d=>d.x)//vertical
+                            //  .attr("cy", d=>d.y)
+                             .attr("r", 7);
+
+            const text = svg.selectAll("text")
+                             .data(root.descendants())
+                             .enter()
+                             .append("text")
+                             .attr("transform",d=> `translate(${d.y +5 },${d.x})`)
+                             .attr("text-anchor",d => d.children ? "end" : "start")
+                             .attr("class", d=> !d.children ? "leaf":"")
+                             .text(d=> d.data.id)
+                             
+            })             
+
+        </script>
+    </body>
+</html>

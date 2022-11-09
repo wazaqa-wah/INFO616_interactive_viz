@@ -1,0 +1,47 @@
+
+
+  {
+    "id":"Marquise de Cat",
+    "children":[
+        {"id":"Birdsong: Place one wood at each sawmill",
+        "children":[
+            {"id":"Craft",
+            "children":[
+                {"id":"Crossbow"},
+                {"id":"Hammer"},
+                {"id":"Tea"},
+                {"id":"Coin"},
+                {"id":"Crossbow"},
+                {"id":"swords",
+                "children":[
+                    {"id":"Action",
+                    "children":[
+                        {"id":"Battle"},
+                        {"id":"March",
+                        "children":[
+                            {"id":"2 Moves max"}
+                        ]},
+                        {"id":"Recruit",
+                        "children":[
+                            {"id":"Add 1 warrior at each recuiter (once per turn)"}
+                        ]},
+                        {"id":"Build",
+                        "children":[
+                            {"id":"Build buildings based on the wood amount in clearings you rule"}
+                        ]},
+                        {"id":"Overwork",
+                        "children":[
+                            {"id":"Spend card and place wood at a matching clearing with sawmill"}
+                        ]},
+                        {"id":"Evening",
+                        "children":[
+                            {"id":"Draw 1 card + Rewards from Builings section"}
+                        ]}
+                    ]}
+                ]}
+            ]}
+            
+        ]}
+    ]
+
+  }
